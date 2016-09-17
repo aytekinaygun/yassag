@@ -1,0 +1,62 @@
+{% extends "dashboard_base.html" %}
+
+
+{% block menu_link_2_active %}class="treeview active"{% endblock %}
+    {% block menu_link_2_1_active %}{% endblock %}
+    {% block menu_link_2_2_active %}{% endblock %}
+    {% block menu_link_2_3_active %}class="active"{% endblock %}
+
+{% block page_title %}Reddedilen Cihazlar{% endblock %}
+
+{% block content %}
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>İstek Tarihi</th>
+                  <th>Adı Soyadı</th>
+                  <th>Cihaz</th>
+                  <th>Not</th>
+                  <th>Red Tarihi</th>
+                  <th>IP Adresi</th>
+                  <th>MAC Adresi</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  {% for i in context %}
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ i.request_date }}</td>
+                  <td>{{ i.user_name }}</td>
+                  <td>{{ i.device.device_status }}</td>
+                  <td>{{ i.note }}</td>
+                  <td>{{ i.transaction_date }}</td>
+                  <td>{{ i.ip }}</td>
+                  <td>{{ i.mac }}</td>
+                  <td class="col-md-2">
+                    <form action="/dashboard/dev_edit/" method="post"> {% csrf_token %}
+                      <div class="btn-toolbar"> <!-- style="margin-left: -40px;" -->
+                        <input type="hidden" name="user_id" value="{{ i.id }}"> <!-- işlem yapılacak user id'yi döndürür.-->
+                        <input name="user_edit" class="btn btn-default btn-sm pull-right" type="submit" value="Düzenle">
+                      </div>
+                    </form>                    
+                  </td>
+                </tr>
+                  {% endfor %}
+                </tbody>
+          
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+
+
+          

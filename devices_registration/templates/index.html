@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cihaz Kayıt</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="/static/devices_registration/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/devices_registration/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/devices_registration/css/form-elements.css">
+        <link rel="stylesheet" href="/static/devices_registration/css/style.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <!-- <link rel="shortcut icon" href="/static/devices_registration/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/devices_registration/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/devices_registration/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/devices_registration/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/static/devices_registration/ico/apple-touch-icon-57-precomposed.png"> -->
+
+    </head>
+
+    <body>
+
+        <!-- Top content -->
+        <div class="top-content">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1><strong>Doruk</strong>  Erkek Öğrenci Yurdu</h1>
+                        <div class="description">
+                       	    <p>
+                                İnternet erişimi için cihazınızın sistemimize kayıt edilmesi gerekmektedir.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
+                    	<form role="form" action="/reg/" method="post" class="f1"> {% csrf_token %}
+
+                    		<h3><strong>Cihaz Kayıt Formu</strong></h3>
+                    		<p>Erişim onayı almak için lütfen formu doldurunuz.</p>
+                    		<div class="f1-steps">
+                    			<div class="f1-progress">
+                    			    <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+                    			</div>
+                    			<div class="f1-step active">
+                    				<div class="f1-step-icon"><i class="fa fa-info-circle"></i></div>
+                    				<p>Açıklama</p>
+                    			</div>
+                    			<div class="f1-step">
+                    				<div class="f1-step-icon"><i class="fa fa-user"></i></div>
+                    				<p>Kullanıcı Bilgileri</p>
+                    			</div>
+                    		    <div class="f1-step">
+                    				<div class="f1-step-icon"><i class="fa fa-check"></i></div>
+                    				<p>Onay</p>
+                    			</div>
+                    		</div>
+                    		
+                    		<fieldset>
+                    		    <p>
+                                <blockquote>
+                                    Öğrenci yurdumuzda internet erişimi sadece kayıtlı cihazlar ile yapılabilmektedir. Cihazınız sistemimize kayıtlı olmadığı için bu ekranı görmektesiniz.
+                                </blockquote>  
+                                <blockquote>
+                                    Sonraki adımlarda sizden istenen bilgileri girdikten sonra <strong class="text-danger" >"Onay"</strong> butonuna basınız ve onay işleminin hızlı olabilmesi için lütfen <u>Müdüriyet</u> ile iletişime geçiniz.
+                                </blockquote>                                    
+                                <p>
+                                <div class="alert alert-success" role="alert">
+                                5651 sayılı yasa gereği internet trafik bilgisi kayıt altına alınmaktadır.</div>
+                                </p>
+                                <p>
+                                    
+                                </p>
+                                <div class="f1-buttons">
+                                   <button type="button" class="btn btn-next">Sonraki Adım</button>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <h4>Ad Soyad:</h4>
+                                <div class="form-group">
+                                    <label class="sr-only" for="f1">Ad Soyad</label>
+                                    <input type="text" name="f1" placeholder="Adınız ve Soyadınız..." class="f1-text form-control" id="">
+                                </div>
+                                <h4>Durum bilgisini seçiniz:</h4>
+                                <div class="form-group">
+                                    <label class="sr-only" for="f2"></label>
+                                          <select name="f2" class="form-control" id="">
+                                            <!-- <option hidden ></option> -->
+                                            {% for status in data.user_status_list %}
+                                                <option value="{{status.0}}">{{ status.1 }}</option>
+                                            {% endfor %}                                            
+                                          </select>
+                                </div>
+                                <h4>Kullandığınız cihaz:</h4>
+                                <div class="form-group">
+                                    <label class="sr-only" for="f3"></label>
+                                          <select name="f3" class="form-control" id="">
+                                            <!-- <option hidden ></option> -->
+                                            {% for device in data.device_list %}
+                                                <option value="{{device.0}}">{{ device.1 }}</option>
+                                            {% endfor %}                                            
+                                          </select>
+                                </div>
+                                <h4>Not:</h4>
+                                <div class="form-group">
+                                    <label class="sr-only" for="f4">Not:</label>
+                                    <input type="textarea" name="f4" placeholder="Eklemek istediğiniz not..." class="f1-textarea form-control" id="">
+                                </div>
+
+                                <div class="f1-buttons">
+                                    <button type="button" class="btn btn-previous">Geri</button>
+                                    <button type="button" class="btn btn-next">İleri</button>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <h4></h4>
+                                <p>
+                                <blockquote>
+                                Bilgilerinizin kontrol edilerek cihazınızın kayıt edilebilmesi için lütfen <strong class="text-danger" >"Onay"</strong>  butonuna tıklayınız.
+                                </blockquote>  
+                                                                  
+                                <p>
+                                
+                                <div class="f1-buttons">
+                                    <button type="button" class="btn btn-previous">Geri</button>
+                                    <button type="submit" class="btn btn-submit">Onay</button>
+                                </div>
+                            </fieldset>
+                    	
+                    	</form>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+
+
+        <!-- Javascript -->
+        <script src="/static/devices_registration/js/jquery-1.11.1.min.js"></script>
+        <script src="/static/devices_registration/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/static/devices_registration/js/jquery.backstretch.min.js"></script>
+        <script src="/static/devices_registration/js/retina-1.1.0.min.js"></script>
+        <script src="/static/devices_registration/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="/static/devices_registration/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+
+</html>

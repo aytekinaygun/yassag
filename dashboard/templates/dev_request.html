@@ -1,0 +1,61 @@
+{% extends "dashboard_base.html" %}
+
+{% block menu_link_1_active %}{% endblock %}
+
+{% block menu_link_2_active %}class="treeview active"{% endblock %}
+    {% block menu_link_2_1_active %}class="active"{% endblock %}
+    {% block menu_link_2_2_active %}{% endblock %}
+    {% block menu_link_2_3_active %}{% endblock %}
+
+
+{% block menu_link_3_active %}{% endblock %}
+
+{% block menu_link_4_active %}{% endblock %}
+
+{% block page_title %}Cihaz Kaydı İsteği Yapanlar{% endblock %}
+
+
+
+{% block content %}
+
+{% for i in context %}
+
+<div class="col-md-4">
+  <!-- Widget: user widget style 1 -->
+  <div class="box box-widget widget-user-2">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-orange">
+      <div class="widget-user-image">
+        <img src="/static/dashboard/dist/img/user_request.png" alt="User Avatar">
+      </div>
+      <!-- /.widget-user-image -->
+      <h3 class="widget-user-username">{{ i.user_name }}</h3>
+      <h5 class="widget-user-desc">{{ i.status.user_status }}</h5>
+    </div>
+    <div class="box-footer no-padding">
+      <ul class="nav nav-stacked">
+        <li><a href="#">İstek Tarihi: <span class="pull-right badge bg-light-blue">{{ i.request_date }}</span></a></li>
+        <li><a href="#">Kullandığı Cihaz <span class="pull-right badge bg-light-blue">{{ i.device.device_status }}</span></a></li>
+        <li><a href="#">IP Adresi:  <span class="pull-right badge bg-light-blue">{{ i.ip }} </span></a></li>
+        <li><a href="#">Mac Adresi: <span class="pull-right badge bg-light-blue">{{ i.mac }} </span></a></li> 
+        <li style="height:100px"><a href="#">Not: {{ i.note }}</a></li>
+        <li>
+        <form action="/dashboard/dev_request/" method="post"> {% csrf_token %}
+          <div class="btn-toolbar">
+            <input type="hidden" name="user_id" value="{{ i.id }}"> <!-- işlem yapılacak user id'yi döndürür.-->
+            <input name="device_save" style="margin: 10px;" class="btn btn-success btn-sm pull-right" type="submit" value="Kaydet">
+            <input name="device_reject" style="margin: 10px;" class="btn btn-danger btn-sm pull-right" type="submit" value="Reddet">
+          </div>
+        </form>
+        </li>  
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+{% endblock %}
+
+
+
+          
