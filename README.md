@@ -1,2 +1,2 @@
 # yassag
-Yassag is Device Registration System
+Yassag is Device Registration System for Internet
