@@ -16,6 +16,7 @@ def calculate_totals():
 	totals = {'number_of_pending':number_of_pending, 'number_of_save':number_of_save, 'number_of_rejected':number_of_rejected}
 	return totals
 
+
 def dashboard(request):
 	totals = calculate_totals()
 	return render_to_response('dashboard.html', totals)
@@ -39,7 +40,6 @@ def device_save_reject_del(request):
 			Users.objects.filter(id=user_id).delete()
 
 	return redirect('/dashboard')
-
 
 def dev_edit(request):
 	if request.method == "POST":
@@ -72,4 +72,7 @@ def dev_check(request):
 def dev_rejected(request):	
 	context = Users.objects.filter(device_status="2").select_related() 
 	return render_to_response('dev_rejected.html', {'context':context}, context_instance=RequestContext(request))
-	
+
+def settings(request):
+	context = ""
+	return render_to_response('settings.html', {'context':context}, context_instance=RequestContext(request))
