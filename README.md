@@ -1,2 +1,3 @@
 # yassag
-Yassag is Device Registration System for Internet
+
+A device registration system Django based.
