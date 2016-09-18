@@ -7,6 +7,7 @@ from django.http import HttpRequest  # for get ip address
 from django.template import RequestContext # for csrf_token
 from django.utils import timezone
 from django.shortcuts import redirect
+from .forms import SettingsForm
 
 def calculate_totals():
 	# pending = 0, save = 1, not save = 2
@@ -73,6 +74,48 @@ def dev_rejected(request):
 	context = Users.objects.filter(device_status="2").select_related() 
 	return render_to_response('dev_rejected.html', {'context':context}, context_instance=RequestContext(request))
 
+# def settings(request):
+# 	data = Settings.objects.get(id="1")
+
+# 	if request.method == "POST":
+# 		form = SettingsForm(request.POST)
+# 		if form.is_valid():
+# 			f = form.cleaned_data
+# 			data.dhcp_file_path = f['dhcp_file_path']
+# 			data.network = f['network']
+# 			data.netmask = f['netmask']
+# 			data.save()
+# 			return redirect('/dashboard')
+# 		else:
+# 			print (form.errors)
+# 			return render_to_response('settings.html', {'errors': form.errors}, context_instance=RequestContext(request))
+
+
+# 	form = SettingsForm(initial=data.__dict__)
+# 	return render_to_response('settings.html', {'form': form}, context_instance=RequestContext(request))
+
 def settings(request):
-	context = ""
-	return render_to_response('settings.html', {'context':context}, context_instance=RequestContext(request))
+	if request.method == "GET":
+		saved_info = ""
+
+	data = Settings.objects.get(id="1")
+	form = SettingsForm(initial=data.__dict__)
+
+	if request.method == "POST":
+		form = SettingsForm(request.POST or None)
+		if form.is_valid():
+			f = form.cleaned_data
+			data.dhcp_file_path = f['dhcp_file_path']
+			data.network = f['network']
+			data.netmask = f['netmask']
+			data.save()
+			saved_info = "Ayarlar kayıt edildi."
+		else:
+			saved_info = ""
+	
+	context = {
+		"saved_info" : saved_info,
+		"form" : form
+		}
+
+	return render_to_response('settings.html', context, context_instance=RequestContext(request))

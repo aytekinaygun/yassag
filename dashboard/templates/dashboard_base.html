@@ -80,17 +80,24 @@
           <ul class="treeview-menu">
             <li {% block menu_link_2_1_active %}{% endblock %}><a href="/dashboard/dev_request"><i class="fa fa-circle-o"></i>Cihaz Kaydı İstekleri</a></li>
             <li {% block menu_link_2_2_active %}{% endblock %}><a href="/dashboard/dev_check"><i class="fa fa-circle-o"></i>Onaylanan Cihazlar</a></li>
-            <li {% block menu_link_2_3_active %}{% endblock %}><a href="/dashboard/dev_rejected.html"><i class="fa fa-circle-o"></i>Reddedilen Cihazlar</a></li>
+            <li {% block menu_link_2_3_active %}{% endblock %}><a href="/dashboard/dev_rejected"><i class="fa fa-circle-o"></i>Reddedilen Cihazlar</a></li>
           </ul>
         </li>
-        <li>
-          <a href="settings.html">
-            <i class="fa fa-setting"></i> <span>Ayarlar</span>
+        <li {% block menu_link_5_active %}{% endblock %}><a href="/dashboard/settings"><i class="fa fa-gears"></i><span>Ayarlar</span>
           </a>
         </li>
-        
-    
-      </ul>
+        <br><br>
+        <li class="header">Ayarları Güncelle</li>
+        <li  style = "padding:10px 30px 0 30px">
+  
+          <form action="" method="post"> {% csrf_token %}
+                        
+            <input name="" class="btn btn-success btn-block" type="submit" value="Restart">
+                     
+        </form>
+
+        </li>
+      </ul>    
     </section>
     <!-- /.sidebar -->
   </aside>
