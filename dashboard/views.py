@@ -17,10 +17,9 @@ def calculate_totals():
 	totals = {'number_of_pending':number_of_pending, 'number_of_save':number_of_save, 'number_of_rejected':number_of_rejected}
 	return totals
 
-
 def dashboard(request):
 	totals = calculate_totals()
-	return render_to_response('dashboard.html', totals)
+	return render_to_response('dashboard.html', totals, context_instance=RequestContext(request))
 
 def device_save_reject_del(request):
 	if request.method == "POST":
@@ -74,26 +73,6 @@ def dev_rejected(request):
 	context = Users.objects.filter(device_status="2").select_related() 
 	return render_to_response('dev_rejected.html', {'context':context}, context_instance=RequestContext(request))
 
-# def settings(request):
-# 	data = Settings.objects.get(id="1")
-
-# 	if request.method == "POST":
-# 		form = SettingsForm(request.POST)
-# 		if form.is_valid():
-# 			f = form.cleaned_data
-# 			data.dhcp_file_path = f['dhcp_file_path']
-# 			data.network = f['network']
-# 			data.netmask = f['netmask']
-# 			data.save()
-# 			return redirect('/dashboard')
-# 		else:
-# 			print (form.errors)
-# 			return render_to_response('settings.html', {'errors': form.errors}, context_instance=RequestContext(request))
-
-
-# 	form = SettingsForm(initial=data.__dict__)
-# 	return render_to_response('settings.html', {'form': form}, context_instance=RequestContext(request))
-
 def settings(request):
 	if request.method == "GET":
 		saved_info = ""
@@ -110,12 +89,38 @@ def settings(request):
 			data.netmask = f['netmask']
 			data.save()
 			saved_info = "Ayarlar kayıt edildi."
-		else:
+		else: # Yanlış girdi olursa
 			saved_info = ""
 	
 	context = {
 		"saved_info" : saved_info,
 		"form" : form
 		}
-
 	return render_to_response('settings.html', context, context_instance=RequestContext(request))
+
+def restart(request):
+	if request.method == "POST":
+		setting_data = Settings.objects.get(id="1")
+		clients = Users.objects.filter(device_status="1")
+		not_clients = Users.objects.filter(device_status="2")
+
+		### DROP
+		drop_rules = []
+		drop_rules.append('iptables -N DROP_Not_Client')
+		drop_rules.append('iptables -A DROP_Not_Client -j LOG --log-level warning --log-prefix "DROP_Not_Client : ')
+		drop_rules.append('iptables -A DROP_Not_Client -j DROP')
+		for not_client in not_clients:
+			drop_rules.append("iptables -A FORWARD -m mac --mac-source %s -j DROP_Not_Client" % (not_client.mac)) 
+
+
+		### ACCEPT
+		accept_rules = []
+		accept_rules.append("ipset create accept_client bitmap:ip,mac range %s/%s" % (setting_data.network, setting_data.netmask))
+		for client in clients:
+		 	accept_rules.append("ipset add accept_client %s,%s" % (client.ip, client.mac))
+		
+	context = {
+		"drop_rules" : drop_rules,
+		"accept_rules" : accept_rules
+	}
+	return render_to_response('restart.html', context, context_instance=RequestContext(request))

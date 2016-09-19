@@ -90,9 +90,9 @@
         <li class="header">Ayarları Güncelle</li>
         <li  style = "padding:10px 30px 0 30px">
   
-          <form action="" method="post"> {% csrf_token %}
+          <form action="/dashboard/restart/" method="post"> {% csrf_token %}
                         
-            <input name="" class="btn btn-success btn-block" type="submit" value="Restart">
+            <button type="submit" class="btn btn-block btn-default"><i class="fa fa-refresh"></i> Tekrar Başlat</button>
                      
         </form>
 

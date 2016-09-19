@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^dev_edit', views.dev_edit, name='dev_edit'),
     url(r'^device_save_reject_del', views.device_save_reject_del, name='device_save_reject_del'),
     url(r'^settings', views.settings, name='settings'),
+    url(r'^restart', views.restart, name='restart'),
 ]
