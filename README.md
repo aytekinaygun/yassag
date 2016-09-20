@@ -1,3 +1,4 @@
 # yassag
 
-A device registration system Django based.
+
+Django-based device registration system for internet authority

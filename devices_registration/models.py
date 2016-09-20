@@ -10,7 +10,7 @@ class Users(models.Model):
 	device_status = models.IntegerField(default=0)
 	transaction_date = models.DateTimeField(blank=True, null=True)
 	ip = models.GenericIPAddressField(protocol='IPv4')
-	mac = models.CharField(max_length=20)
+	mac = models.CharField(max_length=20, blank=True, null=True)
 
 
 class Users_Status(models.Model):
