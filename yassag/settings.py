@@ -1,5 +1,5 @@
 """
-Django settings for yassag project.
+Django settings for yassaq project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
