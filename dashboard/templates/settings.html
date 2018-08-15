@@ -22,15 +22,29 @@
       <div class="box-body">
       <!-- Box Content -->
 
-        <form role="form" action="/dashboard/settings/" method="post"> {% csrf_token %}
-           <div class="form-group">
-      
-            {{ form.as_p  }}
-
+        <form class="col-lg-6" role="form" action="/dashboard/settings/" method="post"> {% csrf_token %}
+       
+            <div class="form-group">
+              <label>{{ form.dhcp_file_path.label }}</label>
+                {{ form.dhcp_file_path }}
+                {{ form.dhcp_file_path.errors }}
+             </div>
+             <div class="row">
+                <div class="form-group col-lg-8">
+                  <label>{{ form.network.label }}</label>
+                    {{form.network}}
+                    {{form.network.errors}}
                 </div>
+              
+                <div class="form-group col-lg-4">
+                  <label>{{ form.netmask.label }}</label>
+                    {{form.netmask}}
+                    {{form.netmask.errors}}              
+                </div>
+            </div>
 
-
-              <div class="box-footer">
+            
+            <div class="box-footer col-lg-6">
                 <button type="submit" class="btn btn-primary">Kaydet</button>
               </div>
         </form>
