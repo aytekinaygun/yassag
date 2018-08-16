@@ -45,9 +45,9 @@ def dev_edit(request):
 	if request.method == "POST":
 		user_id = request.POST.get('user_id')
 		context = Users.objects.filter(id=user_id).select_related()
-		return render_to_response('dev_edit.html', {'context':context}, context_instance=RequestContext(request))	
+		return render_to_response('dev_edit.html', {'context':context}, context_instance=RequestContext(request))
 
-def dev_request(request):	
+def dev_request(request):
 	if request.method == "POST":
 		if 'device_save' in request.POST:
 			device_status = '1'
@@ -60,17 +60,17 @@ def dev_request(request):
 		Users.objects.filter(id=user_id).update(device_status=device_status, transaction_date=transaction_date)
 
 	# TABLE JOIN
-	context = Users.objects.filter(device_status="0").select_related() 
+	context = Users.objects.filter(device_status="0").select_related()
 	return render_to_response('dev_request.html', {'context':context}, context_instance=RequestContext(request))
 
 
 def dev_check(request):
-	context = Users.objects.filter(device_status="1").select_related() 
+	context = Users.objects.filter(device_status="1").select_related()
 	return render_to_response('dev_check.html', {'context':context}, context_instance=RequestContext(request))
 
 
-def dev_rejected(request):	
-	context = Users.objects.filter(device_status="2").select_related() 
+def dev_rejected(request):
+	context = Users.objects.filter(device_status="2").select_related()
 	return render_to_response('dev_rejected.html', {'context':context}, context_instance=RequestContext(request))
 
 def settings(request):
@@ -91,7 +91,7 @@ def settings(request):
 			saved_info = "Ayarlar kayıt edildi."
 		else: # Yanlış girdi olursa
 			saved_info = ""
-	
+
 	context = {
 		"saved_info" : saved_info,
 		"form" : form
@@ -110,7 +110,7 @@ def restart(request):
 		drop_rules.append('iptables -A DROP_Not_Client -j LOG --log-level warning --log-prefix "DROP_Not_Client : ')
 		drop_rules.append('iptables -A DROP_Not_Client -j DROP')
 		for not_client in not_clients:
-			drop_rules.append("iptables -A FORWARD -m mac --mac-source %s -j DROP_Not_Client" % (not_client.mac)) 
+			drop_rules.append("iptables -A FORWARD -m mac --mac-source %s -j DROP_Not_Client" % (not_client.mac))
 
 
 		### ACCEPT
@@ -118,7 +118,7 @@ def restart(request):
 		accept_rules.append("ipset create accept_client bitmap:ip,mac range %s/%s" % (setting_data.network, setting_data.netmask))
 		for client in clients:
 		 	accept_rules.append("ipset add accept_client %s,%s" % (client.ip, client.mac))
-		
+
 	context = {
 		"drop_rules" : drop_rules,
 		"accept_rules" : accept_rules

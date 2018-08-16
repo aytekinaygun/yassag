@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'yassaq.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$', include('dashboard.urls')),
+    url(r'^$', include('devices_registration.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^reg/', include('devices_registration.urls')), # device_registration apps url's
     url(r'^admin/', include(admin.site.urls)),

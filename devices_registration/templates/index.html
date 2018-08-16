@@ -9,25 +9,15 @@
         <title>Cihaz Kayıt</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link rel="stylesheet" href="/static/devices_registration/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/devices_registration/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/static/devices_registration/css/form-elements.css">
+		    <link rel="stylesheet" href="/static/devices_registration/css/form-elements.css">
         <link rel="stylesheet" href="/static/devices_registration/css/style.css">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <!-- Favicon and touch icons -->
-        <!-- <link rel="shortcut icon" href="/static/devices_registration/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/devices_registration/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/devices_registration/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/devices_registration/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="/static/devices_registration/ico/apple-touch-icon-57-precomposed.png"> -->
 
     </head>
 
@@ -36,7 +26,7 @@
         <!-- Top content -->
         <div class="top-content">
             <div class="container">
-                
+
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 text">
                         <h1><strong>Doruk</strong>  Erkek Öğrenci Yurdu</h1>
@@ -47,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 form-box">
                     	<form role="form" action="/reg/" method="post" class="f1"> {% csrf_token %}
@@ -71,21 +61,21 @@
                     				<p>Onay</p>
                     			</div>
                     		</div>
-                    		
+
                     		<fieldset>
                     		    <p>
                                 <blockquote>
                                     Öğrenci yurdumuzda internet erişimi sadece kayıtlı cihazlar ile yapılabilmektedir. Cihazınız sistemimize kayıtlı olmadığı için bu ekranı görmektesiniz.
-                                </blockquote>  
+                                </blockquote>
                                 <blockquote>
                                     Sonraki adımlarda sizden istenen bilgileri girdikten sonra <strong class="text-danger" >"Onay"</strong> butonuna basınız ve onay işleminin hızlı olabilmesi için lütfen <u>Müdüriyet</u> ile iletişime geçiniz.
-                                </blockquote>                                    
+                                </blockquote>
                                 <p>
                                 <div class="alert alert-success" role="alert">
                                 5651 sayılı yasa gereği internet trafik bilgisi kayıt altına alınmaktadır.</div>
                                 </p>
                                 <p>
-                                    
+
                                 </p>
                                 <div class="f1-buttons">
                                    <button type="button" class="btn btn-next">Sonraki Adım</button>
@@ -105,7 +95,7 @@
                                             <!-- <option hidden ></option> -->
                                             {% for status in data.user_status_list %}
                                                 <option value="{{status.0}}">{{ status.1 }}</option>
-                                            {% endfor %}                                            
+                                            {% endfor %}
                                           </select>
                                 </div>
                                 <h4>Kullandığınız cihaz:</h4>
@@ -115,7 +105,7 @@
                                             <!-- <option hidden ></option> -->
                                             {% for device in data.device_list %}
                                                 <option value="{{device.0}}">{{ device.1 }}</option>
-                                            {% endfor %}                                            
+                                            {% endfor %}
                                           </select>
                                 </div>
                                 <h4>Not:</h4>
@@ -135,20 +125,20 @@
                                 <p>
                                 <blockquote>
                                 Bilgilerinizin kontrol edilerek cihazınızın kayıt edilebilmesi için lütfen <strong class="text-danger" >"Onay"</strong>  butonuna tıklayınız.
-                                </blockquote>  
-                                                                  
+                                </blockquote>
+
                                 <p>
-                                
+
                                 <div class="f1-buttons">
                                     <button type="button" class="btn btn-previous">Geri</button>
                                     <button type="submit" class="btn btn-submit">Onay</button>
                                 </div>
                             </fieldset>
-                    	
+
                     	</form>
                     </div>
                 </div>
-                    
+
             </div>
         </div>
 
@@ -159,7 +149,7 @@
         <script src="/static/devices_registration/js/jquery.backstretch.min.js"></script>
         <script src="/static/devices_registration/js/retina-1.1.0.min.js"></script>
         <script src="/static/devices_registration/js/scripts.js"></script>
-        
+
         <!--[if lt IE 10]>
             <script src="/static/devices_registration/js/placeholder.js"></script>
         <![endif]-->
